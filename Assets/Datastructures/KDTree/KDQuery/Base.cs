@@ -39,7 +39,7 @@ using System;
 
 namespace DataStructures.ViliWonka.KDTree {
 
-    public partial class KDQuery {
+    public partial class KDQuery<T> where T : IPositionable {
 
         protected KDQueryNode[] queueArray;  // queue array
         protected Heap.MinHeap<KDQueryNode>  minHeap; //heap for k-nearest

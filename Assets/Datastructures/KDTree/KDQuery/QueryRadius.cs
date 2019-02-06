@@ -27,7 +27,7 @@ using System;
 
 namespace DataStructures.ViliWonka.KDTree {
 
-    public partial class KDQuery {
+    public partial class KDQuery<T> where T : IPositionable {
 
         /// <summary>
         /// Search by radius method.
@@ -36,11 +36,11 @@ namespace DataStructures.ViliWonka.KDTree {
         /// <param name="queryPosition">Position</param>
         /// <param name="queryRadius">Radius</param>
         /// <param name="resultIndices">Initialized list, cleared.</param>
-        public void Radius(KDTree tree, Vector3 queryPosition, float queryRadius, List<int> resultIndices) {
+        public void Radius(KDTree<T> tree, Vector3 queryPosition, float queryRadius, List<int> resultIndices) {
 
             Reset();
 
-            Vector3[] points = tree.Points;
+            var points = tree.Points;
             int[] permutation = tree.Permutation;
 
             float squaredRadius = queryRadius * queryRadius;
@@ -117,7 +117,7 @@ namespace DataStructures.ViliWonka.KDTree {
 
                         int index = permutation[i];
 
-                        if(Vector3.SqrMagnitude(points[index] - queryPosition) <= squaredRadius) {
+                        if(Vector3.SqrMagnitude(points[index].Position - queryPosition) <= squaredRadius) {
 
                             resultIndices.Add(index);
                         }

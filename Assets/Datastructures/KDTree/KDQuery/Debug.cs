@@ -29,7 +29,7 @@ using System;
 
 namespace DataStructures.ViliWonka.KDTree {
 
-    public partial class KDQuery {
+    public partial class KDQuery<T> where T : IPositionable {
 
         // uses gizmos
         public void DrawLastQuery() {

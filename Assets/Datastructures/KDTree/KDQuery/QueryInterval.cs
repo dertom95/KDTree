@@ -27,13 +27,13 @@ using System;
 
 namespace DataStructures.ViliWonka.KDTree {
 
-    public partial class KDQuery {
+    public partial class KDQuery<T> where T : IPositionable {
 
-        public void Interval(KDTree tree, Vector3 min, Vector3 max, List<int> resultIndices) {
+        public void Interval(KDTree<T> tree, Vector3 min, Vector3 max, List<int> resultIndices) {
 
             Reset();
 
-            Vector3[] points = tree.Points;
+            var points = tree.Points;
             int[] permutation = tree.Permutation;
 
             var rootNode = tree.RootNode;
@@ -128,7 +128,7 @@ namespace DataStructures.ViliWonka.KDTree {
 
                             int index = permutation[i];
 
-                            Vector3 v = points[index];
+                            Vector3 v = points[index].Position;
 
                             if(v[0] >= min[0]
                             && v[1] >= min[1]

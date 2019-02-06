@@ -29,13 +29,13 @@ namespace DataStructures.ViliWonka.KDTree {
 
     using Heap;
 
-    public partial class KDQuery {
+    public partial class KDQuery<T> where T : IPositionable {
 
-        public void ClosestPoint(KDTree tree, Vector3 queryPosition, List<int> resultIndices, List<float> resultDistances = null) {
+        public void ClosestPoint(KDTree<T> tree, Vector3 queryPosition, List<int> resultIndices, List<float> resultDistances = null) {
 
             Reset();
 
-            Vector3[] points = tree.Points;
+            List<T> points = tree.Points;
             int[] permutation = tree.Permutation;
 
             int smallestIndex = 0;
@@ -115,7 +115,7 @@ namespace DataStructures.ViliWonka.KDTree {
 
                         int index = permutation[i];
 
-                        sqrDist = Vector3.SqrMagnitude(points[index] - queryPosition);
+                        sqrDist = Vector3.SqrMagnitude(points[index].Position - queryPosition);
 
                         if(sqrDist <= SSR) {
 
